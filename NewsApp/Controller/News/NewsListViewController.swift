@@ -83,6 +83,10 @@ class NewsListViewController: UIViewController {
     
     //MARK:- Redirect To Login Screen
     func redirectToLoginScreen(){
+        let isLoggedInFlag = Data(from: false)
+        let status = KeychainService.save(key: "isLoggedInFlag", data: isLoggedInFlag)
+        print("status: ", status)
+        
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let loginVC = storyBoard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
         let appdelegate = UIApplication.shared.delegate as! AppDelegate

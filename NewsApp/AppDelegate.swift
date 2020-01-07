@@ -28,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        //MARK:- Check if loggedIn
+        if (NewsUtil.checkIsLoggedIn()){
+            redirectToNewsScreen()
+        }
 
         return true
     }
@@ -53,7 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    
+    func redirectToNewsScreen(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let newsListVC = storyBoard.instantiateViewController(withIdentifier: "NewsListViewController") as! NewsListViewController
+        let navigationController = UINavigationController(rootViewController: newsListVC)
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        appdelegate.window!.rootViewController = navigationController
+    }
 
 }
 

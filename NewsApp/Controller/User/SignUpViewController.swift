@@ -56,12 +56,20 @@ class SignUpViewController: UIViewController {
         let status2 = KeychainService.save(key: "Password", data: passwordData)
         print("status: ", status2)
         
+        let isLoggedInFlag = Data(from: true)
+        let status3 = KeychainService.save(key: "isLoggedInFlag", data: isLoggedInFlag)
+        print("status: ", status3)
+        
         if let receivedUsernameData = KeychainService.load(key: "Username"), let receivedPasswordData = KeychainService.load(key: "Password") {
 //            let result = receivedPasswordData.to(type: String.self)
 //            print("result: ", result)
             print("Username: ", receivedUsernameData.to(type: String.self))
             print("Password: ", receivedPasswordData.to(type: String.self))
-            return true
+            
+            if (NewsUtil.checkIsLoggedIn()){
+                return true
+            }
+            
         }
         
         return false

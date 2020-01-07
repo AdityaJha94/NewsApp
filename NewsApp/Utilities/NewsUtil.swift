@@ -78,6 +78,17 @@ class NewsUtil{
         }
     }
     
+    class func checkIsLoggedIn() -> Bool{
+        if let isLoggedIn = KeychainService.load(key: "isLoggedInFlag"){
+            
+            if (isLoggedIn.to(type: Bool.self)){
+                return true
+            }
+            
+        }
+        return false
+    }
+    
 }
 
 struct Color {

@@ -50,12 +50,20 @@ class SignInViewController: UIViewController {
 
     
     func checkKeychainData() -> Bool{
+        let isLoggedInFlag = Data(from: true)
+        let status3 = KeychainService.save(key: "isLoggedInFlag", data: isLoggedInFlag)
+        print("status: ", status3)
+        
+        
         if let receivedUsernameData = KeychainService.load(key: "Username"), let receivedPasswordData = KeychainService.load(key: "Password") {
 
             if (usernameTextField.text != receivedUsernameData.to(type: String.self)) || (passwordTextField.text != receivedPasswordData.to(type: String.self)){
                 return false
             }else{
-                return true
+                if NewsUtil.checkIsLoggedIn(){
+                    return true
+                }
+                
             }
         }
         
