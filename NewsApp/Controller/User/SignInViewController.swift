@@ -29,10 +29,10 @@ class SignInViewController: UIViewController {
     //MARK:- UI Setup Method
     func setUpUI(){
       usernameIcon.image = UIImage(named: "Email")!.withRenderingMode(.alwaysTemplate)
-        usernameIcon.tintColor = UIColor(red:1.00, green:0.32, blue:0.21, alpha:1.0)
+        usernameIcon.tintColor = Color.appMainColor
         
         passwordIcon.image = UIImage(named: "Password")!.withRenderingMode(.alwaysTemplate)
-        passwordIcon.tintColor = UIColor(red:1.00, green:0.32, blue:0.21, alpha:1.0)
+        passwordIcon.tintColor = Color.appMainColor
         
         loginBtn.layer.cornerRadius = 6
         loginBtn.clipsToBounds = true
@@ -66,6 +66,7 @@ class SignInViewController: UIViewController {
     //MARK:- Button Actions
     @IBAction func loginBtnClicked(_ sender: UIButton) {
         
+        dismissKeyBoard()
         if !(checkForValidation()){
             let alertController = UIAlertController(title: "Oops!!", message: "Please fill all fields", preferredStyle: .alert)
             //We add buttons to the alert controller by creating UIAlertActions:
@@ -97,8 +98,16 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func registerBtnClicked(_ sender: Any) {
+        dismissKeyBoard()
         let  signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
         signUpViewController?.modalPresentationStyle = .fullScreen
         self.present(signUpViewController!, animated: false, completion: nil)
+    }
+    
+    
+    //MARK:- Dismiss Keypad function
+    func dismissKeyBoard(){
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
 }

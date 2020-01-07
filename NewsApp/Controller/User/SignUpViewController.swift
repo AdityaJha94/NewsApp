@@ -29,10 +29,10 @@ class SignUpViewController: UIViewController {
     //MARK:- UI Setup Method
     func setUpUI(){
         usernameIcon.image = UIImage(named: "Email")!.withRenderingMode(.alwaysTemplate)
-        usernameIcon.tintColor = UIColor(red:1.00, green:0.32, blue:0.21, alpha:1.0)
+        usernameIcon.tintColor = Color.appMainColor
         
         passwordIcon.image = UIImage(named: "Password")!.withRenderingMode(.alwaysTemplate)
-        passwordIcon.tintColor = UIColor(red:1.00, green:0.32, blue:0.21, alpha:1.0)
+        passwordIcon.tintColor = Color.appMainColor
         
         registerBtn.layer.cornerRadius = 6
         registerBtn.clipsToBounds = true
@@ -69,8 +69,8 @@ class SignUpViewController: UIViewController {
     
     //MARK:- Button Actions
     @IBAction func registerBtnTapped(_ sender: UIButton) {
-        //Set NewsListViewController as Root ViewController
         
+        dismissKeyBoard()
         if !(checkForValidation()){
             
             let alertController = UIAlertController(title: "Oops!!", message: "Please fill all fields", preferredStyle: .alert)
@@ -102,10 +102,17 @@ class SignUpViewController: UIViewController {
     
     
     @IBAction func signInBtnClicked(_ sender: UIButton) {
+        dismissKeyBoard()
         let  signInViewController = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController
         signInViewController?.modalPresentationStyle = .fullScreen
         self.present(signInViewController!, animated: false, completion: nil)
         
+    }
+    
+    //MARK:- Dismiss Keypad function
+    func dismissKeyBoard(){
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
     
 }

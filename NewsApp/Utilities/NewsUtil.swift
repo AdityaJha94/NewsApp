@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NewsUtil{
     
@@ -76,5 +77,11 @@ class NewsUtil{
             return timeLeft
         }
     }
+    
+}
+
+struct Color {
+    static let color = ""
+    static let appMainColor = UIColor(red:1.00, green:0.32, blue:0.21, alpha:1.0)
     
 }
